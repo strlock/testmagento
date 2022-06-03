@@ -75,8 +75,8 @@ $_helper = $block->getData('outputHelper');
                             </strong>
                             <div class="vendor product-item-vendor">
                                 <?php foreach($_product->getVendorsData() as $vendorData){?>
-                                    <div>Vendor name: <?php echo $vendorData['name']?></div>
-                                    <div>Vendor description: <?php echo $vendorData['description']?></div>
+                                    <div><b>Vendor: <?php echo $vendorData['name']?></b></div>
+                                    <div><i><?php echo $vendorData['description']?></i></div>
                                 <?php }?>
                             </div>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>

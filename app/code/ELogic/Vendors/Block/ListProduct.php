@@ -45,7 +45,7 @@ class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
         }
         $vendorsById = [];
         $vendorsCollection = $this->vendorModel->getCollection();
-        $vendorsCollection->addFieldToFilter('entity_id', $vendorIds);
+        $vendorsCollection->addFieldToFilter('entity_id', ['in' => $vendorIds]);
         foreach ($vendorsCollection->getItems() as $vendor) {
             $vendorsById[$vendor->getId()] = $vendor;
         }

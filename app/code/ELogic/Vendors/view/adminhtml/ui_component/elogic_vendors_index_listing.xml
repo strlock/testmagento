@@ -3,18 +3,22 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">elogic_vendors_index_listing.elogic_vendors_index_listing_data_source</item>
-            <item name="deps" xsi:type="string">elogic_vendors_index_listing.elogic_vendors_index_listing_data_source</item>
-        </item>
-        <item name="spinner" xsi:type="string">elogic_vendors_index_listing_columns</item>
-        <item name="buttons" xsi:type="array">
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add New Item</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/new</item>
-            </item>
         </item>
     </argument>
+    <settings>
+        <spinner>elogic_vendors_index_listing_columns</spinner>
+        <buttons>
+            <button name="add">
+                <name>add</name>
+                <label translate="true">Add Vendor</label>
+                <class>primary</class>
+                <url path="*/*/new" />
+            </button>
+        </buttons>
+        <deps>
+            <dep>elogic_vendors_index_listing.elogic_vendors_index_listing_data_source</dep>
+        </deps>
+    </settings>
     <dataSource name="elogic_vendors_index_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">ELogicVendorsGridDataProvider</argument>

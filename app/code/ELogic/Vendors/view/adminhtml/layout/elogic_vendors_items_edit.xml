@@ -3,7 +3,6 @@
     <update handle="editor"/>
     <body>
         <referenceContainer name="content">
-            <!--block class="ELogic\Vendors\Block\Adminhtml\Items\Edit" name="test_items_edit"/!-->
             <uiComponent name="elogic_vendor_edit_form"/>
         </referenceContainer>
     </body>

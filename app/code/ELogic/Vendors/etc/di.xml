@@ -28,4 +28,22 @@
 		</arguments>
 	</type>
     <preference for="Magento\Catalog\Block\Product\ListProduct" type="ELogic\Vendors\Block\ListProduct" />
+    <type name="ELogic\Vendors\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">elogic/tmp</argument>
+            <argument name="basePath" xsi:type="string">elogic/vendors</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

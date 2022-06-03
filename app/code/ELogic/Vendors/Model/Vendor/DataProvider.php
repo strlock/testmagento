@@ -34,11 +34,16 @@ class DataProvider extends ModifierPoolDataProvider
             return $this->loadedData;
         }
         $vendorId = (int)$this->request->getParam($this->getRequestFieldName());
+        if (empty($vendorId)) {
+            return [];
+        }
         $vendor = $this->collection->getItemById($vendorId);
         $vendorData = $vendor->getData();
-        $vendorData['image'] = [
-            $this->getImageInfo($vendorData['image'])
-        ];
+        if (!empty($vendorData['image'])) {
+            $vendorData['image'] = [
+                $this->getImageInfo($vendorData['image'])
+            ];
+        }
         $this->loadedData = [
             $vendorId => $vendorData
         ];
@@ -55,6 +60,7 @@ class DataProvider extends ModifierPoolDataProvider
             'url' => $url,
             'size' => filesize($path),
             'type' => mime_content_type($path),
+            'uri' => $image,
         ];
     }
 }

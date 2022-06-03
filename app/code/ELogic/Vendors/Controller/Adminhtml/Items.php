@@ -80,4 +80,20 @@ abstract class Items extends \Magento\Backend\App\Action
     {
         return $this->_authorization->isAllowed('ELogic_Vendors::items');
     }
+
+    protected function resolveVendorId() : int
+    {
+        $vendorId = (int)$this->getRequest()->getParam('id', false);
+        return $vendorId ?: (int)$this->getRequest()->getParam('entity_id', false);
+    }
+
+    protected function _initVendor($getRootInstead = false)
+    {
+        $vendorId = $this->resolveVendorId();
+        $vendor = $this->_objectManager->create(\ELogic\Vendors\Model\Vendor::class);
+        if ($vendorId) {
+            $vendor->load($vendorId);
+        }
+        return $vendor;
+    }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
-class Delete extends \ELogic\Vendors\Controller\Adminhtml\Items
+use Magento\Framework\App\Action\HttpPostActionInterface;
+
+class Delete extends \ELogic\Vendors\Controller\Adminhtml\Items implements HttpPostActionInterface
 {
 
     public function execute()

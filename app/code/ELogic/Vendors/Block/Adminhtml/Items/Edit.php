@@ -19,20 +19,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
         $this->_objectId = 'id';
         $this->_controller = 'adminhtml_items';
         $this->_blockGroup = 'ELogic_Vendors';
-
         parent::_construct();
-
-        $this->buttonList->add(
-            'save_and_continue_edit',
-            [
-                'class' => 'save',
-                'label' => __('Save and Continue Edit'),
-                'data_attribute' => [
-                    'mage-init' => ['button' => ['event' => 'saveAndContinueEdit', 'target' => '#edit_form']],
-                ]
-            ],
-            10
-        );
     }
 
     public function getHeaderText()

@@ -9,7 +9,6 @@
         <spinner>elogic_vendors_index_listing_columns</spinner>
         <buttons>
             <button name="add">
-                <name>add</name>
                 <label translate="true">Add Vendor</label>
                 <class>primary</class>
                 <url path="*/*/new" />

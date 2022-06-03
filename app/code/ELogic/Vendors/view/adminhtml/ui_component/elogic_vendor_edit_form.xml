@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">elogic_vendor_edit_form.elogic_vendor_edit_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Vendor Data</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Magento\Cms\Block\Adminhtml\Page\Edit\SaveButton"/>
+            <button name="delete" class="Magento\Cms\Block\Adminhtml\Page\Edit\DeleteButton"/>
+            <button name="back" class="Magento\Cms\Block\Adminhtml\Page\Edit\BackButton"/>
+        </buttons>
+        <namespace>elogic_vendor_edit_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>elogic_vendor_edit_form.elogic_vendor_edit_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="elogic_vendor_edit_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="elogic_vendors/item/save"/>
+        </settings>
+        <dataProvider class="ELogic\Vendors\Model\Vendor\DataProvider" name="elogic_vendor_edit_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label>Vendor data</label>
+        </settings>
+        <field name="name" formElement="input">
+            <settings>
+                <label>Name</label>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <settings>
+                <label>Description</label>
+            </settings>
+        </field>
+        <field name="created_at" formElement="date">
+            <settings>
+                <label>Created At</label>
+            </settings>
+        </field>
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <notice translate="true">Some notice.</notice>
+                <label>Image</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">path/to/save</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

@@ -1,11 +1,14 @@
 <?php
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
-class Save extends \ELogic\Vendors\Controller\Adminhtml\Items
+use Magento\Framework\App\Action\HttpPostActionInterface;
+
+class Save extends \ELogic\Vendors\Controller\Adminhtml\Items implements HttpPostActionInterface
 {
     public function execute()
     {
-        if ($this->getRequest()->getPostValue()) {
+        $post = $this->getRequest()->getPostValue();
+        if (!empty($post)) {
             try {
                 $model = $this->_objectManager->create('ELogic\Vendors\Model\Vendor');
                 $data = $this->getRequest()->getPostValue();

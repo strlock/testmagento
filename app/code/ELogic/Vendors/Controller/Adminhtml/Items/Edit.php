@@ -1,7 +1,9 @@
 <?php
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
-class Edit extends \ELogic\Vendors\Controller\Adminhtml\Items
+use Magento\Framework\App\Action\HttpGetActionInterface;
+
+class Edit extends \ELogic\Vendors\Controller\Adminhtml\Items implements HttpGetActionInterface
 {
 
     public function execute()

@@ -20,10 +20,12 @@ class VendorImage extends \Magento\Framework\View\Element\Template
         if (empty($this->_product)) {
             $this->_product = $this->_coreRegistry->registry('product');
         }
+        $vendorIds = explode(',', $this->_product->getVendor());
+        $vendorsCollection = $this->vendorModel->getCollection();
+        $vendorsCollection->addFieldToFilter('entity_id', ['in' => $vendorIds]);
         $mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-        foreach (explode(',', $this->_product->getVendor()) as $vendor_id) {
-            $this->vendorModel->load($vendor_id);
-            $result[] = $mediaUrl.$this->vendorModel->getImage();
+        foreach ($vendorsCollection as $vendor) {
+            $result[] = $mediaUrl.$vendor->getImage();
         }
         return $result;
     }

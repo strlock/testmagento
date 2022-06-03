@@ -25,7 +25,6 @@ class Save extends \ELogic\Vendors\Controller\Adminhtml\Items
                                 __('File cannot be saved to path: $1', $destinationPath)
                             );
                         }
-
                         $imagePath = 'elogic/vendors'.$result['file'];
                         $data['image'] = $imagePath;
                     } catch (\Exception $e) {
@@ -53,14 +52,14 @@ class Save extends \ELogic\Vendors\Controller\Adminhtml\Items
                 if ($id) {
                     $model->load($id);
                     if ($id != $model->getId()) {
-                        throw new \Magento\Framework\Exception\LocalizedException(__('The wrong item is specified.'));
+                        throw new \Magento\Framework\Exception\LocalizedException(__('The wrong vendor is specified.'));
                     }
                 }
                 $model->setData($data);
                 $session = $this->_objectManager->get('Magento\Backend\Model\Session');
                 $session->setPageData($model->getData());
                 $model->save();
-                $this->messageManager->addSuccess(__('You saved the item.'));
+                $this->messageManager->addSuccess(__('You saved the vendor.'));
                 $session->setPageData(false);
                 if ($this->getRequest()->getParam('back')) {
                     $this->_redirect('elogic_vendors/*/edit', ['id' => $model->getId()]);
@@ -79,7 +78,7 @@ class Save extends \ELogic\Vendors\Controller\Adminhtml\Items
                 return;
             } catch (\Exception $e) {
                 $this->messageManager->addError(
-                    __('Something went wrong while saving the item data. Please review the error log.')
+                    __('Something went wrong while saving the vendor data. Please review the error log.')
                 );
                 $this->_objectManager->get('Psr\Log\LoggerInterface')->critical($e);
                 $this->_objectManager->get('Magento\Backend\Model\Session')->setPageData($data);

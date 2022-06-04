@@ -28,6 +28,7 @@
 		</arguments>
 	</type>
     <preference for="Magento\Catalog\Block\Product\ListProduct" type="ELogic\Vendors\Block\ListProduct" />
+    <preference for="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="ELogic\Vendors\Block\ListProduct" />
     <type name="ELogic\Vendors\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">elogic/tmp</argument>

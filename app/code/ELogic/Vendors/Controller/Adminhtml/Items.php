@@ -94,6 +94,7 @@ abstract class Items extends \Magento\Backend\App\Action
         if ($vendorId) {
             $vendor->load($vendorId);
         }
+        $this->_coreRegistry->register('vendor', $vendor);
         return $vendor;
     }
 }

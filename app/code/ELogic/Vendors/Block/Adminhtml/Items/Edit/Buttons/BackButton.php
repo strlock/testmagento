@@ -1,29 +1,14 @@
 <?php
 namespace ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons;
 
+use ELogic\Vendors\Block\Adminhtml\Items\Edit\AbstractButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Magento\Framework\UrlInterface;
 
 /**
  * Back button configuration provider
  */
-class BackButton implements ButtonProviderInterface
+class BackButton extends AbstractButton implements ButtonProviderInterface
 {
-    /**
-     * URL builder
-     *
-     * @var UrlInterface
-     */
-    private $urlBuilder;
-
-    /**
-     * @param UrlInterface $urlBuilder
-     */
-    public function __construct(
-        UrlInterface $urlBuilder
-    ) {
-        $this->urlBuilder = $urlBuilder;
-    }
 
     /**
      * Retrieve button data

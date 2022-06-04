@@ -20,6 +20,9 @@ class VendorImage extends \Magento\Framework\View\Element\Template
         if (empty($this->_product)) {
             $this->_product = $this->_coreRegistry->registry('product');
         }
+        if (empty($this->_product->getVendor())) {
+            return [];
+        }
         $vendorIds = explode(',', $this->_product->getVendor());
         $vendorsCollection = $this->vendorModel->getCollection();
         $vendorsCollection->addFieldToFilter('entity_id', ['in' => $vendorIds]);

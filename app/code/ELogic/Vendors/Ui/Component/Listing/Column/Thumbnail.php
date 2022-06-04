@@ -40,23 +40,20 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
-            $path = $this->storeManager->getStore()->getBaseUrl(
-                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                    );
+            $path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
             foreach ($dataSource['data']['items'] as & $item) {
+                $item['image'] = preg_replace('#^/media/#', '', $item['image']);
                 if ($item['image']) {
                     $item[$fieldName . '_src'] = $path.$item['image'];
                     $item[$fieldName . '_alt'] = $item['name'];
                     $item[$fieldName . '_orig_src'] = $path.$item['image'];
                 }else{
-                    // please place your placeholder image at pub/media/elogic/vendors/placeholder/placeholder.jpg
                     $item[$fieldName . '_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
                     $item[$fieldName . '_alt'] = 'Place Holder';
                     $item[$fieldName . '_orig_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
                 }
             }
         }
-
         return $dataSource;
     }
 }

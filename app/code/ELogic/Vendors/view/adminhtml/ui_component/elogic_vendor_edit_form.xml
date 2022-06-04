@@ -9,8 +9,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\SaveButton"/>
-            <button name="back" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\BackButton"/>
+            <button name="save" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\SaveButton" />
+            <button name="delete" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\DeleteButton" />
+            <button name="back" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\BackButton" />
         </buttons>
         <namespace>elogic_vendor_edit_form</namespace>
         <dataScope>data</dataScope>
@@ -48,14 +49,8 @@
                 <label>Description</label>
             </settings>
         </field>
-        <field name="created_at" formElement="date">
-            <settings>
-                <label>Created At</label>
-            </settings>
-        </field>
         <field name="image" formElement="imageUploader">
             <settings>
-                <notice translate="true">Some notice.</notice>
                 <label>Image</label>
                 <componentType>imageUploader</componentType>
             </settings>

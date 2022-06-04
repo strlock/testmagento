@@ -42,7 +42,7 @@ class Main extends Generic implements TabInterface
 
     protected function _prepareForm()
     {
-        $model = $this->_coreRegistry->registry('current_elogic_vendors_items');
+        $model = $this->_coreRegistry->registry('vendor');
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('item_');

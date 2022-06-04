@@ -24,9 +24,9 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 
     public function getHeaderText()
     {
-        $item = $this->_coreRegistry->registry('current_elogic_vendors_items');
-        if ($item->getId()) {
-            return __("Edit Item '%1'", $this->escapeHtml($item->getName()));
+        $vendor = $this->_coreRegistry->registry('vendor');
+        if ($vendor->getId()) {
+            return __("Edit Item '%1'", $this->escapeHtml($vendor->getName()));
         } else {
             return __('New Item');
         }

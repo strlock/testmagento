@@ -53,6 +53,7 @@ class DataProvider extends ModifierPoolDataProvider
     public function getImageInfo($image): array
     {
         $mediaBaseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
+        $image = preg_replace('#^/media/#', '', $image);
         $path = $this->directoryList->getPath('media').'/'.$image;
         $url = rtrim($mediaBaseUrl, '/').'/'.$image;
         $size = 0;

@@ -1,12 +1,13 @@
 <?php
 namespace ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons;
 
+use ELogic\Vendors\Block\Adminhtml\Items\Edit\AbstractButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
  * Class SaveButton
  */
-class SaveButton implements ButtonProviderInterface
+class SaveButton extends AbstractButton implements ButtonProviderInterface
 {
     /**
      * Save button

@@ -112,7 +112,7 @@ class ImageUploader
      * @param string $baseTmpPath
      * @return void
      */
-    public function setBaseTmpPath($baseTmpPath)
+    public function setBaseTmpPath(string $baseTmpPath): void
     {
         $this->baseTmpPath = $baseTmpPath;
     }
@@ -123,7 +123,7 @@ class ImageUploader
      * @param string $basePath
      * @return void
      */
-    public function setBasePath($basePath)
+    public function setBasePath(string $basePath): void
     {
         $this->basePath = $basePath;
     }
@@ -134,7 +134,7 @@ class ImageUploader
      * @param string[] $allowedExtensions
      * @return void
      */
-    public function setAllowedExtensions($allowedExtensions)
+    public function setAllowedExtensions(array $allowedExtensions): void
     {
         $this->allowedExtensions = $allowedExtensions;
     }
@@ -144,7 +144,7 @@ class ImageUploader
      *
      * @return string
      */
-    public function getBaseTmpPath()
+    public function getBaseTmpPath(): string
     {
         return $this->baseTmpPath;
     }
@@ -154,7 +154,7 @@ class ImageUploader
      *
      * @return string
      */
-    public function getBasePath()
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
@@ -162,9 +162,9 @@ class ImageUploader
     /**
      * Retrieve allowed extensions
      *
-     * @return string[]
+     * @return array|string
      */
-    public function getAllowedExtensions()
+    public function getAllowedExtensions(): array|string
     {
         return $this->allowedExtensions;
     }

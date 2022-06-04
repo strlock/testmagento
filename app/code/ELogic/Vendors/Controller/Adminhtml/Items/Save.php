@@ -1,6 +1,7 @@
 <?php
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
+use ELogic\Vendors\Model\ImageProcessor;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use \ELogic\Vendors\Controller\Adminhtml\Items;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -22,6 +23,7 @@ class Save extends Items implements HttpPostActionInterface
         AdapterFactory $adapterFactory,
         Filesystem $filesystem,
         Filesystem\Driver\File $file,
+        private ImageProcessor $imageProcessor,
     ) {
         parent::__construct(
             $context,
@@ -44,7 +46,7 @@ class Save extends Items implements HttpPostActionInterface
             return $resultRedirect->setPath('elogic_vendors/items/index');
         }
         $vendorPostData = $this->getRequest()->getPostValue();
-        $vendorPostData['image'] = '';
+        $this->imageProcessor->process($vendorPostData);
         if ($vendorPostData) {
             $vendor->addData($vendorPostData);
             try {

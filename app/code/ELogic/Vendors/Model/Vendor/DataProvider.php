@@ -55,11 +55,17 @@ class DataProvider extends ModifierPoolDataProvider
         $mediaBaseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
         $path = $this->directoryList->getPath('media').'/'.$image;
         $url = rtrim($mediaBaseUrl, '/').'/'.$image;
+        $size = 0;
+        $mimeType = '';
+        if (file_exists($path)) {
+            $size = filesize($path);
+            $mimeType = mime_content_type($path);
+        }
         return             [
             'name' => basename($image),
             'url' => $url,
-            'size' => filesize($path),
-            'type' => mime_content_type($path),
+            'size' => $size,
+            'type' => $mimeType,
             'uri' => $image,
         ];
     }

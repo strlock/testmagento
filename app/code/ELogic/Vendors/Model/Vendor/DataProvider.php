@@ -3,6 +3,8 @@
 namespace ELogic\Vendors\Model\Vendor;
 
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
@@ -12,6 +14,18 @@ use \Magento\Framework\Filesystem\DirectoryList;
 
 class DataProvider extends ModifierPoolDataProvider
 {
+    /**
+     * @param $name
+     * @param $primaryFieldName
+     * @param $requestFieldName
+     * @param CollectionFactory $collectionFactory
+     * @param RequestInterface $request
+     * @param StoreManagerInterface $storeManager
+     * @param DirectoryList $directoryList
+     * @param array $meta
+     * @param array $data
+     * @param PoolInterface|null $pool
+     */
     public function __construct(
         $name,
         $primaryFieldName,
@@ -28,7 +42,10 @@ class DataProvider extends ModifierPoolDataProvider
         $this->collection = $collectionFactory->create();
     }
 
-    public function getData()
+    /**
+     * @return array
+     */
+    public function getData(): array
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
@@ -50,6 +67,12 @@ class DataProvider extends ModifierPoolDataProvider
         return $this->loadedData;
     }
 
+    /**
+     * @param $image
+     * @return array
+     * @throws FileSystemException
+     * @throws NoSuchEntityException
+     */
     public function getImageInfo($image): array
     {
         $mediaBaseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);

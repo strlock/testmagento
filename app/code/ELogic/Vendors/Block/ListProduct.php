@@ -2,16 +2,26 @@
 namespace ELogic\Vendors\Block;
 
 use ELogic\Vendors\Helper\Product as ProductHelper;
-use ELogic\Vendors\Model\Vendor;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Catalog\Helper\Output as OutputHelper;
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Framework\Data\Helper\PostHelper;
 use Magento\Framework\Url\Helper\Data;
+use Magento\Catalog\Block\Product\ListProduct as CatalogListProductBlock;
 
-class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
+class ListProduct extends CatalogListProductBlock
 {
+    /**
+     * @param Context $context
+     * @param PostHelper $postDataHelper
+     * @param Resolver $layerResolver
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param Data $urlHelper
+     * @param ProductHelper $productHelper
+     * @param array $data
+     * @param OutputHelper|null $outputHelper
+     */
     public function __construct(
         Context $context,
         PostHelper $postDataHelper,
@@ -33,6 +43,9 @@ class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
         );
     }
 
+    /**
+     * @return ListProduct
+     */
     protected function _beforeToHtml()
     {
         $result = parent::_beforeToHtml();

@@ -31,6 +31,9 @@ class ImageProcessor
      * @throws FileSystemException
      */
     public function process(&$data, string $attributeName = 'image'): void {
+        if (empty($data[$attributeName])) {
+            return;
+        }
         $value = $data[$attributeName];
         if ($this->isTmpFileAvailable($value) && $imageName = $this->getUploadedImageName($value)) {
             try {

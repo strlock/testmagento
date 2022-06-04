@@ -1,20 +1,38 @@
 <?php
 namespace ELogic\Vendors\Block;
-class VendorImage extends \Magento\Framework\View\Element\Template
-{
-    protected $_product = null;
 
+use ELogic\Vendors\Model\Vendor;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\View\Element\Template;
+
+class VendorImage extends Template
+{
+    protected ?object $_product = null;
+
+    /**
+     * @param Context $context
+     * @param Registry $_coreRegistry
+     * @param Vendor $vendorModel
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        private \Magento\Framework\Registry $_coreRegistry,
-        private \ELogic\Vendors\Model\Vendor $vendorModel,
-        private \Magento\Store\Model\StoreManagerInterface $storeManager
+        Context $context,
+        private Registry $_coreRegistry,
+        private Vendor $vendorModel,
+        private StoreManagerInterface $storeManager
     )
     {
         parent::__construct($context);
     }
 
-    public function getProductVendorImages()
+    /**
+     * @return array
+     * @throws NoSuchEntityException
+     */
+    public function getProductVendorImages(): array
     {
         $result = [];
         if (empty($this->_product)) {

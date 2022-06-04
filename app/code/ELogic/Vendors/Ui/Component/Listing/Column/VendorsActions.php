@@ -1,35 +1,32 @@
 <?php
 namespace ELogic\Vendors\Ui\Component\Listing\Column;
 
-class VendorsActions extends \Magento\Ui\Component\Listing\Columns\Column
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Ui\Component\Listing\Columns\Column;
+
+class VendorsActions extends Column
 {
     const URL_PATH_EDIT = 'elogic_vendors/items/edit';
 
     /**
-     * URL builder
-     *
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $_urlBuilder;
-
-    /**
      * constructor
      *
-     * @param \Magento\Framework\UrlInterface $urlBuilder
-     * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
-     * @param \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory
+     * @param UrlInterface $urlBuilder
+     * @param ContextInterface $context
+     * @param UiComponentFactory $uiComponentFactory
      * @param array $components
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\UrlInterface $urlBuilder,
-        \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
-        \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
+        protected UrlInterface $urlBuilder,
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
         array $components = [],
         array $data = []
     )
     {
-        $this->_urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -40,18 +37,13 @@ class VendorsActions extends \Magento\Ui\Component\Listing\Columns\Column
      * @param array $dataSource
      * @return array
      */
-    public function prepareDataSource(array $dataSource)
+    public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 $item[$this->getData('name')] = [
                     'edit' => [
-                        'href' => $this->_urlBuilder->getUrl(
-                            static::URL_PATH_EDIT,
-                            [
-                                'id' => $item['entity_id']
-                            ]
-                        ),
+                        'href' => $this->urlBuilder->getUrl(static::URL_PATH_EDIT, ['id' => $item['entity_id']]),
                         'label' => __('Edit')
                     ],
                 ];

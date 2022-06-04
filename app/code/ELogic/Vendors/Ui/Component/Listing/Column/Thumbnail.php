@@ -1,17 +1,16 @@
 <?php
 namespace ELogic\Vendors\Ui\Component\Listing\Column;
 
-use Magento\Catalog\Helper\Image;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\UrlInterface;
+use Magento\Ui\Component\Listing\Columns\Column;
 
-class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
+class Thumbnail extends Column
 {
     const NAME = 'image';
-    const ALT_FIELD = 'name';
-    protected StoreManagerInterface $storeManager;
 
     /**
      * @param ContextInterface $context
@@ -23,12 +22,11 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        StoreManagerInterface $storeManager,
+        protected StoreManagerInterface $storeManager,
         array $components = [],
         array $data = []
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -42,17 +40,17 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
-            $path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+            $path = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
             foreach ($dataSource['data']['items'] as & $item) {
-                $item['image'] = preg_replace('#^/media/#', '', $item['image']);
-                if ($item['image']) {
-                    $item[$fieldName . '_src'] = $path.$item['image'];
-                    $item[$fieldName . '_alt'] = $item['name'];
-                    $item[$fieldName . '_orig_src'] = $path.$item['image'];
+                if (!empty($item['image'])) {
+                    $item['image'] = preg_replace('#^/media/#', '', $item['image']);
+                    $item[$fieldName.'_src'] = $path.$item['image'];
+                    $item[$fieldName.'_alt'] = $item['name'];
+                    $item[$fieldName.'_orig_src'] = $path.$item['image'];
                 }else{
-                    $item[$fieldName . '_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
-                    $item[$fieldName . '_alt'] = 'Place Holder';
-                    $item[$fieldName . '_orig_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
+                    $item[$fieldName.'_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
+                    $item[$fieldName.'_alt'] = 'Place Holder';
+                    $item[$fieldName.'_orig_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
                 }
             }
         }

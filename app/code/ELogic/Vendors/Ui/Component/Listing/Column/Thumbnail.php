@@ -1,6 +1,8 @@
 <?php
 namespace ELogic\Vendors\Ui\Component\Listing\Column;
 
+use Magento\Catalog\Helper\Image;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -9,13 +11,12 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
 {
     const NAME = 'image';
     const ALT_FIELD = 'name';
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param \Magento\Catalog\Helper\Image $imageHelper
-     * @param \Magento\Framework\UrlInterface $urlBuilder
+     * @param StoreManagerInterface $storeManager
      * @param array $components
      * @param array $data
      */
@@ -35,8 +36,9 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
      *
      * @param array $dataSource
      * @return array
+     * @throws NoSuchEntityException
      */
-    public function prepareDataSource(array $dataSource)
+    public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');

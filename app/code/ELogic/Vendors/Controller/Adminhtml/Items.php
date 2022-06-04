@@ -1,52 +1,50 @@
 <?php
 namespace ELogic\Vendors\Controller\Adminhtml;
 
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\PageFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Framework\Image\AdapterFactory;
 use Magento\Framework\Filesystem;
+use Magento\Backend\App\Action;
+use Magento\Framework\Filesystem\Driver\File;
 
-abstract class Items extends \Magento\Backend\App\Action
+abstract class Items extends Action
 {
-    /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * @var \Magento\Backend\Model\View\Result\ForwardFactory
-     */
-    protected $resultForwardFactory;
-
-    /**
-     * @var \Magento\Framework\View\Result\PageFactory
-     */
-    protected $resultPageFactory;
-
-    protected $uploaderFactory;
-    protected $adapterFactory;
-    protected $filesystem;
+    protected Registry $_coreRegistry;
+    protected ForwardFactory $resultForwardFactory;
+    protected PageFactory $resultPageFactory;
+    protected UploaderFactory $uploaderFactory;
+    protected AdapterFactory $adapterFactory;
+    protected Filesystem $filesystem;
+    protected DirectoryList $directoryList;
 
     /**
      * Initialize Group Controller
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param ForwardFactory $resultForwardFactory
+     * @param PageFactory $resultPageFactory
+     * @param DirectoryList $directoryList
+     * @param UploaderFactory $uploaderFactory
+     * @param AdapterFactory $adapterFactory
+     * @param Filesystem $filesystem
+     * @param File $file
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        Context $context,
+        Registry $coreRegistry,
+        ForwardFactory $resultForwardFactory,
+        PageFactory $resultPageFactory,
         DirectoryList $directoryList,
         UploaderFactory $uploaderFactory,
         AdapterFactory $adapterFactory,
         Filesystem $filesystem,
-        \Magento\Framework\Filesystem\Driver\File $file
+        File $file
     ) {
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context);
@@ -56,15 +54,14 @@ abstract class Items extends \Magento\Backend\App\Action
         $this->uploaderFactory = $uploaderFactory;
         $this->adapterFactory = $adapterFactory;
         $this->filesystem = $filesystem;
-        $this->_file = $file;
     }
 
     /**
      * Initiate action
      *
-     * @return this
+     * @return $this
      */
-    protected function _initAction()
+    protected function _initAction(): static
     {
         $this->_view->loadLayout();
         $this->_setActiveMenu('ELogic_Vendors::items')->_addBreadcrumb(__('Items'), __('Items'));
@@ -76,18 +73,25 @@ abstract class Items extends \Magento\Backend\App\Action
      *
      * @return bool
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed('ELogic_Vendors::items');
     }
 
+    /**
+     * @return int
+     */
     protected function resolveVendorId() : int
     {
         $vendorId = (int)$this->getRequest()->getParam('id', false);
         return $vendorId ?: (int)$this->getRequest()->getParam('entity_id', false);
     }
 
-    protected function _initVendor($getRootInstead = false)
+    /**
+     * @param $getRootInstead
+     * @return mixed
+     */
+    protected function _initVendor($getRootInstead = false): mixed
     {
         $vendorId = $this->resolveVendorId();
         $vendor = $this->_objectManager->create(\ELogic\Vendors\Model\Vendor::class);

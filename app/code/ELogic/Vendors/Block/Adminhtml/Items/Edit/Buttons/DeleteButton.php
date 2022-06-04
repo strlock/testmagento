@@ -3,7 +3,6 @@
 namespace ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons;
 
 use ELogic\Vendors\Block\Adminhtml\Items\Edit\AbstractButton;
-use JetBrains\PhpStorm\ArrayShape;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
@@ -44,7 +43,6 @@ class DeleteButton extends AbstractButton implements ButtonProviderInterface
     /**
      * @return array
      */
-    #[ArrayShape(['_current' => "bool", '_query' => "null[]"])]
     protected function getDefaultUrlParams()
     {
         return ['_current' => true, '_query' => ['isAjax' => null]];

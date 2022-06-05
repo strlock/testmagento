@@ -38,11 +38,18 @@
         <paging name="listing_paging" />
     </listingToolbar>
     <columns name="elogic_vendors_index_listing_columns">
-        <column name="entity_id">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="resizeConfig" xsi:type="array">
+                    <item name="enabled" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>        <column name="entity_id">
             <settings>
                 <filter>textRange</filter>
                 <sorting>desc</sorting>
                 <label>ID</label>
+                <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>50</resizeDefaultWidth>
             </settings>
         </column>
@@ -63,6 +70,7 @@
                 <sortable>false</sortable>
                 <hasPreview>1</hasPreview>
                 <label>Image</label>
+                <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>100</resizeDefaultWidth>
             </settings>
         </column>
@@ -70,12 +78,14 @@
             <settings>
                 <filter>text</filter>
                 <label>Created At</label>
+                <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>200</resizeDefaultWidth>
             </settings>
         </column>
         <actionsColumn name="actions" class="ELogic\Vendors\Ui\Component\Listing\Column\VendorActions" sortOrder="200">
             <settings>
                 <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>100</resizeDefaultWidth>
             </settings>
         </actionsColumn>

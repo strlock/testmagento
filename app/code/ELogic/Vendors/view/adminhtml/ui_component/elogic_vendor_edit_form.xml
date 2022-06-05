@@ -4,14 +4,14 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">elogic_vendor_edit_form.elogic_vendor_edit_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Vendor Data</item>
+        <item name="label" xsi:type="string" translate="true">Vendor</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\SaveButton" />
-            <button name="delete" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\DeleteButton" />
             <button name="back" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\BackButton" />
+            <button name="delete" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\DeleteButton" />
+            <button name="save" class="ELogic\Vendors\Block\Adminhtml\Items\Edit\Buttons\SaveButton" />
         </buttons>
         <namespace>elogic_vendor_edit_form</namespace>
         <dataScope>data</dataScope>

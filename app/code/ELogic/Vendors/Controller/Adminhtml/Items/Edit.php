@@ -2,10 +2,15 @@
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use ELogic\Vendors\Controller\Adminhtml\Items as ItemsController;
 
-class Edit extends \ELogic\Vendors\Controller\Adminhtml\Items implements HttpGetActionInterface
+class Edit extends ItemsController implements HttpGetActionInterface
 {
-
+    /**
+     * @return ResponseInterface|ResultInterface|void
+     */
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');

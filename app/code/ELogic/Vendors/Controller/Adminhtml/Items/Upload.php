@@ -6,6 +6,7 @@ use ELogic\Vendors\Model\ImageUploader;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Upload
@@ -30,7 +31,7 @@ class Upload extends Action implements HttpPostActionInterface
      *
      * @return boolean
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed('Magento_Catalog::categories');
     }
@@ -38,7 +39,7 @@ class Upload extends Action implements HttpPostActionInterface
     /**
      * Upload file controller action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {

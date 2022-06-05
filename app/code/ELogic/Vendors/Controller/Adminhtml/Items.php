@@ -11,6 +11,7 @@ use Magento\Framework\Image\AdapterFactory;
 use Magento\Framework\Filesystem;
 use Magento\Backend\App\Action;
 use Magento\Framework\Filesystem\Driver\File;
+use ELogic\Vendors\Model\Vendor;
 
 abstract class Items extends Action
 {
@@ -88,13 +89,12 @@ abstract class Items extends Action
     }
 
     /**
-     * @param $getRootInstead
      * @return mixed
      */
-    protected function _initVendor($getRootInstead = false): mixed
+    protected function _initVendor(): mixed
     {
         $vendorId = $this->resolveVendorId();
-        $vendor = $this->_objectManager->create(\ELogic\Vendors\Model\Vendor::class);
+        $vendor = $this->_objectManager->create(Vendor::class);
         if ($vendorId) {
             $vendor->load($vendorId);
         }

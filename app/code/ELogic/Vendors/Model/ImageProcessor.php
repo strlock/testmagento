@@ -6,8 +6,9 @@ use ELogic\Vendors\Model\ImageUploader;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\File\Uploader;
-use \Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 class ImageProcessor
 {
@@ -41,7 +42,7 @@ class ImageProcessor
                 $newImgRelativePath = $this->imageUploader->moveFileFromTmp($imageName, true);
                 $value[0]['url'] = $newImgRelativePath;
                 $value[0]['name'] = $value[0]['url'];
-            } catch (\Exception $e) {
+            } catch (Throwable $e) {
                 $this->_logger->critical($e);
             }
         } elseif ($this->fileResidesOutsideCategoryDir($value)) {

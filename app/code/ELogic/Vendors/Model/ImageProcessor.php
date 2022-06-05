@@ -32,6 +32,7 @@ class ImageProcessor
      */
     public function process(&$data, string $attributeName = 'image'): void {
         if (empty($data[$attributeName])) {
+            $data[$attributeName] = null;
             return;
         }
         $value = $data[$attributeName];

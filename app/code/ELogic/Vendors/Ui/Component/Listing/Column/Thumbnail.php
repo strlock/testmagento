@@ -41,16 +41,16 @@ class Thumbnail extends Column
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
             $path = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
-            foreach ($dataSource['data']['items'] as & $item) {
+            foreach ($dataSource['data']['items'] as &$item) {
                 if (!empty($item['image'])) {
                     $item['image'] = preg_replace('#^/media/#', '', $item['image']);
                     $item[$fieldName.'_src'] = $path.$item['image'];
                     $item[$fieldName.'_alt'] = $item['name'];
                     $item[$fieldName.'_orig_src'] = $path.$item['image'];
                 }else{
-                    $item[$fieldName.'_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
+                    $item[$fieldName.'_src'] = $path.'elogic/vendors/placeholder.png';
                     $item[$fieldName.'_alt'] = 'Place Holder';
-                    $item[$fieldName.'_orig_src'] = $path.'elogic/vendors/placeholder/placeholder.jpg';
+                    $item[$fieldName.'_orig_src'] = $path.'elogic/vendors/placeholder.png';
                 }
             }
         }

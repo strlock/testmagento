@@ -6,7 +6,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-class VendorsActions extends Column
+class VendorActions extends Column
 {
     const URL_PATH_EDIT = 'elogic_vendors/items/edit';
 

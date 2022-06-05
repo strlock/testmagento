@@ -46,7 +46,9 @@ class VendorImage extends Template
         $vendorsCollection->addFieldToFilter('entity_id', ['in' => $vendorIds]);
         $mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         foreach ($vendorsCollection as $vendor) {
-            $result[] = $mediaUrl.$vendor->getImage();
+            $imageUrl = $vendor->getImage();
+            $imageUrl = preg_replace('#^/media#', '', $imageUrl);
+            $result[] = $mediaUrl.$imageUrl;
         }
         return $result;
     }

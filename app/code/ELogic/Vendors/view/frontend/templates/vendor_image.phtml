@@ -1,6 +1,14 @@
 <?php $vendorImages = $block->getProductVendorImages()?>
+<style type="text/css">
+    .product-vendor-images {
+        padding: 2rem;
+    }
+    .product-vendor-images img {
+        max-height: 64px;
+    }
+</style>
 <div class="product-vendor-images">
     <?php foreach ($vendorImages as $vendorImageUrl) { ?>
-        <img src="<?php echo $vendorImageUrl?>" alt="" height="64" style="max-height: 64px" />&nbsp;&nbsp;&nbsp;
+        <img src="<?php echo $vendorImageUrl?>" alt="" />&nbsp;&nbsp;&nbsp;
     <?php }?>
 </div>

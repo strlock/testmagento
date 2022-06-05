@@ -15,8 +15,14 @@ class InstallData implements InstallDataInterface
     {
         //
     }
-
-
+    
+    /**
+     * @param ModuleDataSetupInterface $setup
+     * @param ModuleContextInterface $context
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Zend_Validate_Exception
+     */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $eavSetup = $this->eavSetupFactory->create();

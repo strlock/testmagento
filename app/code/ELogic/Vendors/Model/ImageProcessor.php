@@ -97,7 +97,7 @@ class ImageProcessor
      * @param array $value Attribute value
      * @return string
      */
-    private function getUploadedImageName($value): string
+    private function getUploadedImageName(array $value): string
     {
         if (is_array($value) && isset($value[0]['name'])) {
             return $value[0]['name'];

@@ -15,9 +15,9 @@ use \Magento\Framework\Filesystem\DirectoryList;
 class DataProvider extends ModifierPoolDataProvider
 {
     /**
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param CollectionFactory $collectionFactory
      * @param RequestInterface $request
      * @param StoreManagerInterface $storeManager
@@ -27,9 +27,9 @@ class DataProvider extends ModifierPoolDataProvider
      * @param PoolInterface|null $pool
      */
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
         CollectionFactory $collectionFactory,
         private RequestInterface $request,
         private StoreManagerInterface $storeManager,
@@ -73,7 +73,7 @@ class DataProvider extends ModifierPoolDataProvider
      * @throws FileSystemException
      * @throws NoSuchEntityException
      */
-    public function getImageInfo($image): array
+    public function getImageInfo($image)
     {
         $mediaBaseUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
         $image = preg_replace('#^/media/#', '', $image);

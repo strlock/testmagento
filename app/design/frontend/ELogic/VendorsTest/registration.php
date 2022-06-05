@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::THEME, 'frontend/ELogic/elogic', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::THEME, 'frontend/ELogic/VendorsTest', __DIR__);

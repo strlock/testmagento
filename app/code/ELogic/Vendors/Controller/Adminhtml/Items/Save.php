@@ -2,6 +2,8 @@
 namespace ELogic\Vendors\Controller\Adminhtml\Items;
 
 use ELogic\Vendors\Model\ImageProcessor;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use \ELogic\Vendors\Controller\Adminhtml\Items as ItemsController;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -11,18 +13,22 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Image\AdapterFactory;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\PageFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Throwable;
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Cache\Frontend\Pool as CachePool;
 
 class Save extends ItemsController implements HttpPostActionInterface
 {
     protected $eavConfig;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param ForwardFactory $resultForwardFactory
+     * @param PageFactory $resultPageFactory
      * @param DirectoryList $directoryList
      * @param UploaderFactory $uploaderFactory
      * @param AdapterFactory $adapterFactory
@@ -31,16 +37,19 @@ class Save extends ItemsController implements HttpPostActionInterface
      * @param ImageProcessor $imageProcessor
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        Context $context,
+        Registry $coreRegistry,
+        ForwardFactory $resultForwardFactory,
+        PageFactory $resultPageFactory,
         DirectoryList $directoryList,
         UploaderFactory $uploaderFactory,
         AdapterFactory $adapterFactory,
         Filesystem $filesystem,
         Filesystem\Driver\File $file,
         private ImageProcessor $imageProcessor,
+        private TypeListInterface $cacheTypeList,
+        private CachePool $cacheFrontendPool,
+
     ) {
         parent::__construct(
             $context,
@@ -72,11 +81,23 @@ class Save extends ItemsController implements HttpPostActionInterface
             $vendor->addData($vendorPostData);
             try {
                 $vendor->save();
+                $this->clearCache();
                 $this->messageManager->addSuccessMessage(__('You saved the vendor.'));
             } catch (Throwable $e) {
                 $this->messageManager->addErrorMessage(__('Something went wrong while saving the vendor.'));
             }
         }
         return $resultRedirect->setPath('elogic_vendors/items/index');
+    }
+
+    private function clearCache()
+    {
+        $types = array('config','layout','block_html','collections','reflection','db_ddl','eav','config_integration','config_integration_api','full_page','translate','config_webservice');
+        foreach ($types as $type) {
+            $this->cacheTypeList->cleanType($type);
+        }
+        foreach ($this->cacheFrontendPool as $cacheFrontend) {
+            $cacheFrontend->getBackend()->clean();
+        }
     }
 }

@@ -44,7 +44,8 @@
                     <item name="enabled" xsi:type="boolean">true</item>
                 </item>
             </item>
-        </argument>        <column name="entity_id">
+        </argument>
+        <column name="entity_id">
             <settings>
                 <filter>textRange</filter>
                 <sorting>desc</sorting>

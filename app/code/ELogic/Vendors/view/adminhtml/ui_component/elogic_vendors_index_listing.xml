@@ -36,6 +36,19 @@
         <filters name="listing_filters" />
         <columnsControls name="columns_controls"/>
         <paging name="listing_paging" />
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected vendors?</message>
+                        <title translate="true">Delete vendorss</title>
+                    </confirm>
+                    <url path="elogic_vendors/items/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
     </listingToolbar>
     <columns name="elogic_vendors_index_listing_columns">
         <argument name="data" xsi:type="array">
@@ -45,6 +58,13 @@
                 </item>
             </item>
         </argument>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>50</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
         <column name="entity_id">
             <settings>
                 <filter>textRange</filter>

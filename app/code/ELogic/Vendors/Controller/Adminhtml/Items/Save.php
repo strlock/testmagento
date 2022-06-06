@@ -17,6 +17,7 @@ use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Throwable;
+use Exception;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Cache\Frontend\Pool as CachePool;
 
@@ -80,6 +81,10 @@ class Save extends ItemsController implements HttpPostActionInterface
         if ($vendorPostData) {
             $vendor->addData($vendorPostData);
             try {
+                $validate = $vendor->validate();
+                if ($validate !== true) {
+                    throw new Exception('Invalid data');
+                }
                 $vendor->save();
                 $this->clearCache();
                 $this->messageManager->addSuccessMessage(__('You saved the vendor.'));

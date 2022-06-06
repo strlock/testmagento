@@ -12,4 +12,15 @@ class Vendor extends AbstractModel
     {
         $this->_init('ELogic\Vendors\Model\ResourceModel\Vendor');
     }
+
+    public function validate()
+    {
+        if (empty($this->getName())) {
+            return false;
+        }
+        if (empty($this->getDescription())) {
+            return false;
+        }
+        return true;
+    }
 }

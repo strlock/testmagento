@@ -49,8 +49,7 @@ class ListProduct extends CatalogListProductBlock
     protected function _beforeToHtml()
     {
         $result = parent::_beforeToHtml();
-        $collection = $this->_getProductCollection();
-        $this->productHelper->addVendorsDataToProductsCollection($collection);
+        $this->productHelper->addVendorsDataToProductsCollection($this->_productCollection);
         return $result;
     }
 }

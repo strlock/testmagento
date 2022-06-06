@@ -97,7 +97,7 @@ class Save extends ItemsController implements HttpPostActionInterface
 
     private function clearCache()
     {
-        $types = array('config','layout','block_html','collections','reflection','db_ddl','eav','config_integration','config_integration_api','full_page','translate','config_webservice');
+        $types = array('block_html','full_page');
         foreach ($types as $type) {
             $this->cacheTypeList->cleanType($type);
         }
